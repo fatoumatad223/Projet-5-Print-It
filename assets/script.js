@@ -1,3 +1,4 @@
+// Tableau d'image : [ 0, 1, 2, 3] 
 const slides = [
 	{
 		"image":"slide1.jpg",
@@ -16,3 +17,11 @@ const slides = [
 		"tagLine":"Autocollants <span>avec découpe laser sur mesure</span>"
 	}
 ]
+
+const arrow = document.querySelectorAll(".arrow")
+
+arrow.forEach((arrow) => {
+	arrow.addEventListener('click' , (e) => {
+		const calcNextSlide = e.target.id === "arrow-right" ? 1 : -1
+	})
+})
