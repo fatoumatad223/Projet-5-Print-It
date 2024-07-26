@@ -19,39 +19,58 @@ const slides = [
 	}
 ]
 
-// Je récupère mes éléments
-const bannerImg = document.querySelector('.banner-img');
-const arrowLeft = document.querySelector('.arrow_left');
-const arrowRight = document.querySelector('.arrow_right');
-const mesSlides = slides.length;
-const dots = document.querySelectorAll('.dot'); 
-// L'indice d'un tableau commence toujours à 0
-let i = 0; 
+// Mes éléments pour les flèches 
+const bannerImg = document.querySelector('.banner-img'); // Images	
+const arrowLeft = document.querySelector('.arrow_left'); // Flèche gauche
+const arrowRight = document.querySelector('.arrow_right'); // Flèche droite
+const mesSlides = slides.length; // La taille de mon tableau
+let i = 0; // i = indice et l'indice d'un tableau commence toujours à 0
+
 
 // Gestionnaire d'événement clic gauche
 arrowLeft.addEventListener("click", function () {
+	const dots = document.querySelectorAll('.dot');
+	dots[i].classList.remove("dot_selected")																				// On retire la selection sur le bullet point d'avant 
 	i--;
 	if (i === -1) {
 		i = mesSlides -1
 	}
-	bannerImg.src = "./assets/slideshow/" + slides[i].image
+
+	bannerImg.src = "./assets/slideshow/" + slides[i].image																	// On va chercher nos images en fonction de l'endroit où l'on se trouve avec [i]
+	dots[i].classList.add("dot_selected")																					// On va chercher nos dots en fonction de l'endroit où l'on se trouve avec [i]
+
+	const tagLine = document.querySelector('.tagLine'); 																	// Textes sous l'image
+	tagLine.innerHTML = slides[i].tagLine																					// On ajoute le texte avec innerHTML en fonction de l'endroit où l'on se trouve avec [i]
 })
+
 
 // Gestionnaire d'événement clic droit
 arrowRight.addEventListener("click", function () {
+	const dots = document.querySelectorAll('.dot');
+	dots[i].classList.remove("dot_selected")
 	i++;
 	if (i === mesSlides) {
 		i = 0
 	}
 	bannerImg.src = "./assets/slideshow/" + slides[i].image
-	
+	dots[i].classList.add("dot_selected")
+
+	const tagLine = document.querySelector('.tagLine'); // Textes sous l'image
+	tagLine.innerHTML = slides[i].tagLine
 })
 
-/* Fonction points d'indicateur
-function dots () {
-for (let indicateur = 0; index < slides.length; indicateur+++) {
-const dot = document.createElement("div");
-		dot.setAttribute("class", "dot");
+
+// Fonction points d'indicateur
+function points () { 
+	const dots = document.querySelector('.dots');
+	for (let j = 0; j < slides.length; j++) {
+		const dot = document.createElement("div")
+		dot.classList.add("dot")
 		dots.appendChild(dot);
 	}
-}*/
+	document.querySelector(".dot").classList.add("dot_selected") 
+}
+
+points()
+
+// Ne pas donner le m nom a la variable et a la fonction
